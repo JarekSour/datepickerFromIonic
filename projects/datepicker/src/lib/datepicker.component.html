@@ -1,0 +1,24 @@
+<ion-item>
+    <ion-label>Start Date</ion-label>
+    <ion-datetime
+        [cancelText]="cancelText"
+        [location]="location"
+        [disabled]="disabled"
+        [displayFormat]="displayFormat"
+        [doneText]="doneText"
+        [max]="max"
+        [min]="min"
+        [mode]="mode"
+        [placeholder]="placeholder"
+        [value]="value"
+
+        [dayNames]="dayNames"
+        [dayShortNames]="dayShortNames"
+        [monthNames]="monthNames"
+        [monthShortNames]="monthShortNames"
+
+        [name]="name"
+        (ionChange)='onChange($event)'
+    >
+    </ion-datetime>
+</ion-item>
