@@ -13,13 +13,13 @@ export class DatepickerService {
 
     lazyLoadQuill(): Observable<any> {
         return forkJoin([
-            this.loadScript('https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js', true),
-            this.loadScript('https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js'),
-            this.loadStyle('https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css')
+            this.loadScript('https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js', 'ionic.esm.js', true),
+            this.loadScript('https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js', 'ionic.js'),
+            this.loadStyle('https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css', 'ionic.bundle.css')
         ]);
     }
 
-    private loadScript(url: string, type: boolean = false): Observable<any> {
+    private loadScript(url: string, id: string, type: boolean = false): Observable<any> {
         if (this._loadedLibraries[url]) {
             return this._loadedLibraries[url].asObservable();
         }
@@ -27,6 +27,7 @@ export class DatepickerService {
         this._loadedLibraries[url] = new ReplaySubject();
 
         const script = this.document.createElement('script');
+        script.id = id;
         script.type = 'text/javascript';
         script.type = type ? 'module' : 'text/javascript';
         script.async = true;
@@ -41,7 +42,7 @@ export class DatepickerService {
         return this._loadedLibraries[url].asObservable();
     }
 
-    private loadStyle(url: string): Observable<any> {
+    private loadStyle(url: string, id: string): Observable<any> {
         if (this._loadedLibraries[url]) {
             return this._loadedLibraries[url].asObservable();
         }
@@ -49,6 +50,7 @@ export class DatepickerService {
         this._loadedLibraries[url] = new ReplaySubject();
 
         const style = this.document.createElement('link');
+        style.id = id
         style.type = 'text/css';
         style.href = url;
         style.rel = 'stylesheet';
